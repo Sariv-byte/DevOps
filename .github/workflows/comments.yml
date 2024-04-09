@@ -18,7 +18,7 @@ jobs: # The jobs that run in this workflow
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["issue", "fix"]
+              labels: ["issue", "fix", "BUGI"]
             })
       - name: Comment on new issue #this is another step that comments on the issue 
         uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
@@ -30,19 +30,3 @@ jobs: # The jobs that run in this workflow
 # Comment on when an issue is closed
 
 # Comment on when an users opens the first pull request
-name: Greet when a user opens first Pull Request
-
-on: 
-  pull_request:
-    types: opened
-
-jobs:
-  greeting:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-    - uses: actions/firstinteraction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        pr-message: "Congratulations on your first Pull Request"
